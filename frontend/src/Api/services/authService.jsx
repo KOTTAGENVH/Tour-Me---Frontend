@@ -5,7 +5,7 @@ import { apiClient } from "../axios/api";
 
 export const signUp = async (usename, email, role, approved, password) => {
     try {
-        const response = await apiClient.post("/user/create-user", {
+        const response = await apiClient.post("user/create-user", {
             usename,
             email,
             role,
@@ -20,10 +20,10 @@ export const signUp = async (usename, email, role, approved, password) => {
 
 //Authentication Sign In
 
-export const signIn = async (email, username, password) => {
+export const signIn = async (username, password) => {
     try {
-        const response = await apiClient.post("/user/create-user", {
-            email,
+        const response = await apiClient.post("user/login-user", {
+            username,
             username,
             password,
         });
