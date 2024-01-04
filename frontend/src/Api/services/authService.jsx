@@ -3,13 +3,13 @@ import { apiClient } from "../axios/api";
 
 //Authentication Sign Up
 
-export const signUp = async (usename, email, role, approved, password) => {
+export const signUp = async (username, email, role, password) => {
     try {
         const response = await apiClient.post("user/create-user", {
-            usename,
+            username,
             email,
             role,
-            approved,
+            true: true,
             password,
         });
         return response.data;

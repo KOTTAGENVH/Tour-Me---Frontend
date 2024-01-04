@@ -3,7 +3,15 @@ import { Box, Typography, TextField, Grid, Button } from "@mui/material";
 import { signIn } from "../../Api/services/authService";
 import { ToastContainer, toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
+import { loginAction } from "../../Redux/auth/authAction";
+import { useDispatch,  } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 function SignIn() {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,18 +23,13 @@ function SignIn() {
         toast.error("Please fill all the fields");
         return;
       }
-      setLoading(true);
-      const res = await signIn(username, password);
-      if (res.error) {
-        toast.error("Sign In Failed");
-        setLoading(false);
-      }
-      setLoading(false);
+      dispatch(loginAction(username, password)); 
+      navigate("/home", { replace: true });
       toast.success("Sign In Successful");
       setUsername("");
       setPassword("");
+
     } catch (err) {
-      setLoading(false);
       toast.error("Sign In Failed");
     }
   };

@@ -14,7 +14,9 @@ import FormLabel from "@mui/material/FormLabel";
 
 const validationSchema = Yup.object({
   username: Yup.string().required("Username is required"),
-  email: Yup.string().email("Invalid email format").required("Email is required"),
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
   role: Yup.string().required("Role is required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
@@ -36,13 +38,18 @@ function SignUp() {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        const res = await signUp(values.username, values.email, values.role, "true", values.password);
+        const res = await signUp(
+          values.username,
+          values.email,
+          values.role,
+          values.password
+        );
         if (res.error) {
           toast.error("Sorry, your data verification failed");
         } else {
           toast.success("Password changed successfully");
           formik.resetForm();
-          navigate("/home");
+          navigate("/");
         }
       } catch (err) {
         toast.error("Sorry, your data verification failed");
@@ -130,13 +137,17 @@ function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl>
-                  <FormLabel id="demo-row-radio-buttons-group-label">Role In System</FormLabel>
+                  <FormLabel id="demo-row-radio-buttons-group-label">
+                    Role In System
+                  </FormLabel>
                   <RadioGroup
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
                     value={formik.values.role}
-                    onChange={formik.handleChange}
+                    onChange={(e) =>
+                      formik.setFieldValue("role", e.target.value)
+                    }
                     onBlur={formik.handleBlur}
                     sx={{
                       fontSize: "1.2rem",
@@ -144,7 +155,26 @@ function SignUp() {
                       justifyContent: "center",
                     }}
                   >
-                    {/* ... Radio buttons ... */}
+                    <FormControlLabel
+                      value="souvenir"
+                      control={<Radio />}
+                      label="Souvenir Shop"
+                    />
+                    <FormControlLabel
+                      value="hotel"
+                      control={<Radio />}
+                      label="Hotel"
+                    />
+                    <FormControlLabel
+                      value="destination"
+                      control={<Radio />}
+                      label="Destination"
+                    />
+                    <FormControlLabel
+                      value="customer"
+                      control={<Radio />}
+                      label="Customer"
+                    />
                   </RadioGroup>
                   {formik.touched.role && formik.errors.role && (
                     <Typography variant="caption" color="error">
