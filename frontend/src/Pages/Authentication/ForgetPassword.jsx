@@ -1,33 +1,38 @@
 import { useState } from "react";
 import { Box, Typography, TextField, Grid, Button } from "@mui/material";
-import { signIn } from "../../Api/services/authService";
+import { forgotPassword } from "../../Api/services/authService";
 import { ToastContainer, toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
-function SignIn() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+import { useNavigate } from "react-router-dom";
+function ForgetPassword() {
+  const [email, setEmail] = useState("");
+  const [newpassword, setNewPassword] = useState("");
+  const [secretcode, setSecretCode] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (!username && !password) {
+      if (!email && !newpassword && !secretcode) {
         toast.error("Please fill all the fields");
         return;
       }
       setLoading(true);
-      const res = await signIn(username, password);
+      const res = await forgotPassword(email, secretcode, newpassword);
       if (res.error) {
-        toast.error("Sign In Failed");
+        toast.error("Sorry Your Data Verification Is Failed");
         setLoading(false);
       }
       setLoading(false);
-      toast.success("Sign In Successful");
-      setUsername("");
-      setPassword("");
+      toast.success("Password Changed Successfully");
+      setEmail("");
+      setNewPassword("");
+      setSecretCode("");
+      navigate("/");
     } catch (err) {
       setLoading(false);
-      toast.error("Sign In Failed");
+      toast.error("Sorry Your Data Verification Is Failed");
     }
   };
 
@@ -63,19 +68,19 @@ function SignIn() {
           }}
         >
           <Typography variant="h4" component="h1" gutterBottom>
-            Sign In
+            Forgot Password
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 fullWidth
                 required
-                id="username-email"
-                label="UserName or Email"
-                defaultValue="UserName or Email"
+                id="email"
+                label="Email"
+                defaultValue="Email"
                 variant="standard"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 sx={{
                   fontSize: "1.2rem",
                   marginTop: "2%",
@@ -86,12 +91,39 @@ function SignIn() {
               <TextField
                 fullWidth
                 required
-                id="password"
-                label="Password"
-                defaultValue="Password"
+                id="secretcode"
+                label="Secret Code"
+                defaultValue="Secret Code"
                 variant="standard"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={secretcode}
+                onChange={(e) => {
+                  const inputValue = e.target.value;
+                  if (/^\d{0,4}$/.test(inputValue)) {
+                    setSecretCode(inputValue);
+                  }
+                }}
+                sx={{
+                  fontSize: "1.2rem",
+                  marginTop: "2%",
+                }}
+                InputProps={{
+                  inputProps: {
+                    inputMode: "numeric",
+                    pattern: "\\d{4}",
+                  },
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                required
+                id="newpassword"
+                label="New Password"
+                defaultValue="New Password"
+                variant="standard"
+                value={newpassword}
+                onChange={(e) => setNewPassword(e.target.value)}
                 sx={{
                   fontSize: "1.2rem",
                   marginTop: "2%",
@@ -114,7 +146,7 @@ function SignIn() {
             Submit
           </Button>
 
-          <a href="/forgot">
+          <a href="/">
             <Typography
               variant="h6"
               component="h1"
@@ -123,20 +155,7 @@ function SignIn() {
                 marginTop: "5%",
               }}
             >
-              Forgot Password?
-            </Typography>
-          </a>
-
-          <a href="/signup">
-            <Typography
-              variant="h6"
-              component="h1"
-              gutterBottom
-              sx={{
-                marginTop: "5%",
-              }}
-            >
-              Create an Account
+              Back
             </Typography>
           </a>
           <Typography variant="subtitle1">Copyright @TourMe(Web)</Typography>
@@ -146,4 +165,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default ForgetPassword;

@@ -35,12 +35,12 @@ export const signIn = async (username, password) => {
 
 //Authentication Forgot Password
 
-export const forgotPassword = async (email, secretcode, password) => {
+export const forgotPassword = async (email, secretcode, newpassword) => {
     try {
-        const response = await apiClient.post("/user/forget-password", {
+        const response = await apiClient.patch("user/forget-password", {
             email,
             secretcode,
-            password,
+            newpassword,
         });
         return response.data;
     } catch (error) {
