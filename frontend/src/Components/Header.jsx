@@ -21,8 +21,9 @@ import Logo from "../Resources/Logo.png";
 import { Image } from "@mui/icons-material";
 import { setdarkmode } from "../Redux/darkmode/darkmodeAction";
 import { useDispatch } from "react-redux";
+import { signOutAction } from "../Redux/auth/authAction";
 
-const settings = ["Profile", "About Sri lanka", "Logout"];
+const settings = ["Profile", "My Orders", "About Sri lanka", "Logout"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -50,6 +51,24 @@ function Header() {
     setDarkMode(!darkMode);
     dispatch(setdarkmode(!darkMode));
   };
+
+  const handleMenuItemClick = (setting) => {
+    handleCloseUserMenu();
+  
+    if (setting === "Logout") {
+      dispatch(signOutAction());
+      handleCloseUserMenu();
+    } else if (setting === "Profile") {
+      handleCloseUserMenu();
+    } else if (setting === "My Orders") {
+      handleCloseUserMenu();
+    } else if (setting === "About Sri lanka") {
+      handleCloseUserMenu();
+    } else {
+      handleCloseUserMenu();
+    }
+  };
+  
 
   return (
     <AppBar
@@ -151,7 +170,10 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleMenuItemClick(setting)}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

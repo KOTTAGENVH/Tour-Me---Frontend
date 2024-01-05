@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { authSlice, resetState, setLoginResponse, setMessage } from "./authSlice";
 import { signIn } from "../../Api/services/authService";
+import { useNavigate } from "react-router-dom";
 
 
 const authActions = authSlice.actions;
@@ -28,6 +29,8 @@ export const signOutAction = () => {
   return async (dispatch) => {
     try {
       dispatch(resetState());
+      const navigate = useNavigate();
+      navigate("/");
     } catch (error) {
       console.error("Sign out error:", error);
       if (error.response && error.response.data && error.response.data.message) {
