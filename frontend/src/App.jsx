@@ -10,8 +10,18 @@ import { useSelector } from 'react-redux';
 function App() {
 
   const loggedUser = useSelector((state) => state.auth.loggedUser);
+  const darkmode = useSelector((state) => state.darkmode.darkmode);
+
+  const handleCss = () => {
+    if (darkmode) {
+      return "AppDarkmode";
+    } else {
+      return "App";
+    }
+  }
   return (
-    <div className="App">
+    
+    <div className={handleCss()}>
      <BrowserRouter>
      <Routes>
         <Route path="/" element={<SignIn/>} />

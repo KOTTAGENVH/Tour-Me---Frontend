@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const getInitialAuthState = () => {
   const persistedState = localStorage.getItem("persistroot");
   if (persistedState) {
-    console.log("JSON.parse(persistedState)", JSON.parse(persistedState));
+    console.log("JSON.parse(persistedState)", JSON.parse(persistedState.auth));
     return JSON.parse(persistedState);
   }
 
