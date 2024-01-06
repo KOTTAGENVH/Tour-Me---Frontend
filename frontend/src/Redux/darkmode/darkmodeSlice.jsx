@@ -6,7 +6,6 @@ const getInitialDarkmodeState = () => {
   if (persistedState) {
     const parsedState = JSON.parse(persistedState);
     const darkModeState = parsedState ? parsedState.darkMode : null;
-   console.log("darkModeState",darkModeState)
     return darkModeState;
   }
 
