@@ -7,6 +7,8 @@ import SouvenierImage from "../../Resources/SouvenierCarousel.jpeg";
 import HotelImage from "../../Resources/HotelCarousel.webp";
 import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 // Import Swiper styles
 import "swiper/css";
@@ -16,12 +18,15 @@ import "swiper/css/navigation";
 import "../../CSS/CustomerHome.css";
 
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import Footer from "../../Components/Footer";
 
 function Home() {
   const darkmode = useSelector((state) => state.darkmode.darkmode);
   const [isHovered, setHovered] = useState(false);
   const [isHovered1, setHovered1] = useState(false);
   const [isHovered2, setHovered2] = useState(false);
+
+  const navigate = useNavigate();
   const handleDarkmode = () => {
     if (darkmode) {
       return "white";
@@ -98,11 +103,11 @@ function Home() {
           sx={{ color: handleDarkmode() }}
         >
           {" "}
-          This is a small project done by me using the MERN stack, Redux, Rapid
+          This is a small project done by me(Nowen Kottage) using the MERN stack, Redux, Rapid
           Api. The main motive of this project is to give the user a platform
           where they can find details of Sri - Lanka and also book hotels,
           destinations and purchase souvenirs. Also give suggestions to local
-          taxi firms.
+          taxi firms.Pls note that this is a DEMO.
         </Typography>
       </Box>
 
@@ -122,7 +127,7 @@ function Home() {
             zIndex: 1,
             justifyContent: "center",
             alignItems: "center",
-            width: "25%",
+            width: "400px",
             height: "300px",
             margin: "auto",
             marginTop: "20px",
@@ -134,7 +139,21 @@ function Home() {
           onMouseLeave={() => setHovered(false)}
         >
           {isHovered ? (
-            <Typography variant="body1">dsdsdsdsd</Typography>
+            <Button
+              variant="contained"
+              sx={{
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+                color: handleDarkmode(),
+                fontSize: "24px",
+                borderRadius: "20px",
+              }}
+              onClick={() => navigate("/destinations")}
+            >
+              View Destinations
+            </Button>
           ) : (
             <div
               style={{ position: "relative", width: "100%", height: "100%" }}
@@ -174,7 +193,7 @@ function Home() {
             zIndex: 1,
             justifyContent: "center",
             alignItems: "center",
-            width: "25%",
+            width: "400px",
             height: "300px",
             margin: "auto",
             marginTop: "20px",
@@ -186,7 +205,21 @@ function Home() {
           onMouseLeave={() => setHovered1(false)}
         >
           {isHovered1 ? (
-            <Typography variant="body1">sd sd sds</Typography>
+            <Button
+              variant="contained"
+              sx={{
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+                color: handleDarkmode(),
+                fontSize: "24px",
+                borderRadius: "20px",
+              }}
+              onClick={() => navigate("/souveniers")}
+            >
+              View Souveniers
+            </Button>
           ) : (
             <div
               style={{ position: "relative", width: "100%", height: "100%" }}
@@ -225,7 +258,7 @@ function Home() {
             zIndex: 1,
             justifyContent: "center",
             alignItems: "center",
-            width: "25%",
+            width: "400px",
             height: "300px",
             margin: "auto",
             marginTop: "20px",
@@ -237,7 +270,21 @@ function Home() {
           onMouseLeave={() => setHovered2(false)}
         >
           {isHovered2 ? (
-            <Typography variant="body1">scsdfsdf</Typography>
+            <Button
+              variant="contained"
+              sx={{
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+                color: handleDarkmode(),
+                fontSize: "24px",
+                borderRadius: "20px",
+              }}
+              onClick={() => navigate("/hotels")}
+            >
+              View Hotels
+            </Button>
           ) : (
             <div
               style={{ position: "relative", width: "100%", height: "100%" }}
@@ -271,6 +318,7 @@ function Home() {
           )}
         </Box>
       </div>
+      <Footer/>
     </div>
   );
 }

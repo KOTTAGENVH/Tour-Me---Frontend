@@ -82,7 +82,7 @@ function Header() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Image
-            src={"src/Resources/Logo.png"}
+            src={Logo}
             alt="Logo"
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
