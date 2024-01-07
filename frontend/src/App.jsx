@@ -8,6 +8,7 @@ import SignUp from "./Pages/Authentication/SignUp";
 import Home from "./Pages/Customer/Home";
 import { useSelector } from "react-redux";
 import AboutSriLanka from "./Pages/Customer/AboutSriLanka";
+import Destinations from "./Pages/Customer/Destination/view-all-destinations";
 function App() {
   const loggedUser = useSelector((state) => state.auth.loggedUser);
   const darkmode = useSelector((state) => state.darkmode.darkmode);
@@ -30,6 +31,7 @@ function App() {
             <>
               <Route path="/home" element={<Home />} />
               <Route path="/about-Sri-Lanka" element={<AboutSriLanka />} />
+              <Route path="/destinations" element={<Destinations />} />
             </>
           )}
         </Routes>
