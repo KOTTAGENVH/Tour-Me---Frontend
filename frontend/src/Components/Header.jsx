@@ -22,6 +22,7 @@ import { Image } from "@mui/icons-material";
 import { setdarkmode } from "../Redux/darkmode/darkmodeAction";
 import { useDispatch } from "react-redux";
 import { signOutAction } from "../Redux/auth/authAction";
+import { useNavigate } from "react-router-dom";
 
 const settings = ["Profile", "My Orders", "About Sri lanka", "Logout"];
 
@@ -31,6 +32,7 @@ function Header() {
   const [darkMode, setDarkMode] = React.useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -64,6 +66,7 @@ function Header() {
       handleCloseUserMenu();
     } else if (setting === "About Sri lanka") {
       handleCloseUserMenu();
+      navigate("/about-Sri-Lanka");
     } else {
       handleCloseUserMenu();
     }
