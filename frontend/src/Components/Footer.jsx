@@ -14,6 +14,9 @@ function Footer() {
         alignItems: "center",
         flexDirection: "column",
         backdropFilter: "blur(10px)",
+        position: "fixed",
+        bottom: 0,
+        left: 0,
       }}
     >
         <span>&copy; 2024 Nowen Kottage. All rights reserved. Contact: nowenportfolio@gmail.com</span>

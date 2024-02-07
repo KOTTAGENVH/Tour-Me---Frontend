@@ -24,7 +24,7 @@ import { useDispatch } from "react-redux";
 import { signOutAction } from "../Redux/auth/authAction";
 import { useNavigate } from "react-router-dom";
 
-const settings = ["Profile", "My Orders", "About Sri lanka", "Logout"];
+const settings = ["Profile", "My Orders", "About Sri lanka", "Aiports(LK)" , "Logout"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -67,6 +67,9 @@ function Header() {
     } else if (setting === "About Sri lanka") {
       handleCloseUserMenu();
       navigate("/about-Sri-Lanka");
+    } else if (setting === "Aiports(LK)"){
+      navigate("/airports");
+      handleCloseUserMenu();
     } else {
       handleCloseUserMenu();
     }
@@ -75,8 +78,8 @@ function Header() {
 
   return (
     <AppBar
-      position="static"
-      sx={{
+       position="static"
+     sx={{
         backgroundColor: "transparent",
         backdropFilter: "blur(60px)",
         boxShadow: "none",
@@ -88,6 +91,7 @@ function Header() {
             src={Logo}
             alt="Logo"
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            onClick={() => navigate("/home")}
           />
           <Typography
             variant="h6"
