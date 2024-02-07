@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import Header from "../../Components/Header";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import Footer from "../../Components/Footer";
 import { allSriLankanAirports } from "../../Api/services/airportService";
 import { useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import AirportCard from "../../Components/AirportCard";
 import CircularProgress from "@mui/material/CircularProgress";
+import StickyFooter from "../../Components/StickyFooter";
 
 function Airports() {
   const [progress, setProgress] = React.useState(0);
@@ -50,16 +50,27 @@ function Airports() {
 
   const filteredAirports = data?.filter(
     (airport) =>
-    airport.name && airport.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    airport.city_name && airport.city_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    airport.display_name && airport.display_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    airport.display_title && airport.display_title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    airport.display_subtitle && airport.display_subtitle.toLowerCase().includes(searchQuery.toLowerCase())
+      (airport.name &&
+        airport.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (airport.city_name &&
+        airport.city_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (airport.display_name &&
+        airport.display_name
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())) ||
+      (airport.display_title &&
+        airport.display_title
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())) ||
+      (airport.display_subtitle &&
+        airport.display_subtitle
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()))
   );
 
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      style={{ display: "flex", flexDirection: "column", minHeight: "120vh" }}
     >
       <Header />
       <TextField
@@ -197,7 +208,7 @@ function Airports() {
           </div>
         )}
 
-      <Footer />
+      <StickyFooter/>
     </div>
   );
 }

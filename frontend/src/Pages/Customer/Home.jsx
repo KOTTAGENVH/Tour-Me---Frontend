@@ -44,7 +44,7 @@ function Home() {
   }
 
   return (
-    <div>
+    <div >
       <Header />
       <Swiper
         pagination={{

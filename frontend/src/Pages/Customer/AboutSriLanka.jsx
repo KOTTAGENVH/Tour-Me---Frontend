@@ -29,7 +29,11 @@ function AboutSriLanka() {
   }
 
   return (
-    <div>
+    <div
+    style={{
+      height: "",
+    }}
+    >
       <Header />
       <Box
         sx={{
