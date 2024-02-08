@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import AboutSriLanka from "./Pages/Customer/AboutSriLanka";
 import Destinations from "./Pages/Customer/Destination/view-all-destinations";
 import Airports from "./Pages/Customer/Airports";
+import Souvenier from "./Pages/Customer/Souvenier/view-all-souvenier";
+import Hotels from "./Pages/Customer/Hotel/view-all-hotels";
 function App() {
   const loggedUser = useSelector((state) => state.auth.loggedUser);
   const darkmode = useSelector((state) => state.darkmode.darkmode);
@@ -33,6 +35,8 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/about-Sri-Lanka" element={<AboutSriLanka />} />
               <Route path="/destinations" element={<Destinations />} />
+              <Route path="/hotels" element={<Hotels />} />
+              <Route path="/souveniers" element={<Souvenier />} />
               <Route path="/airports" element={<Airports />} />
             </>
           )}

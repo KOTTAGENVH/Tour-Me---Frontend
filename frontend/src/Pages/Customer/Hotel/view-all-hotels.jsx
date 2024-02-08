@@ -6,11 +6,11 @@ import { useQuery } from "react-query";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import CircularProgress from "@mui/material/CircularProgress";
-import { getAlldestinations } from "../../../Api/services/destinationService";
+import { getallhotels } from "../../../Api/services/hotelService";
 import Viewallcard from "../../../Components/viewallcard";
 import StickyFooter from "../../../Components/StickyFooter";
 
-function Destinations() {
+function Hotels() {
   const [progress, setProgress] = React.useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
@@ -37,7 +37,7 @@ function Destinations() {
   }, []);
 
   const { data, isLoading, error, isError } = useQuery({
-    queryFn: () => getAlldestinations(),
+    queryFn: () => getallhotels(),
   });
 
   const navigate = useNavigate();
@@ -64,12 +64,12 @@ function Destinations() {
   };
 
 
-  const filteredDestinations = data?.filter(destination =>
-    destination.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    destination.maindescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    destination.price.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    destination.Address.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    destination.Address1.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredHotels = data?.filter(hotels =>
+    hotels.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    hotels.maindescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    hotels.price.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    hotels.Address.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    hotels.Address1.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -80,8 +80,8 @@ function Destinations() {
     >
       <Header />
       <TextField
-        id="search-destinations"
-        label="Search Destinations"
+        id="search-hotels"
+        label="Search Hotels"
         variant="standard"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
@@ -170,7 +170,7 @@ function Destinations() {
           justifyContent: "center",
         }}
       >
-      {filteredDestinations!==undefined && !isLoading && !isError && data?.length!==0 && filteredDestinations
+      {filteredHotels!==undefined && !isLoading && !isError && data?.length!==0 && filteredHotels
           ?.slice((page - 1) * itemsPerPage, page * itemsPerPage)
           ?.map((destination) => (
             <Viewallcard
@@ -199,7 +199,7 @@ function Destinations() {
             height: "100vh",
           }}
         >
-          <h1>No Destinations Found</h1>
+          <h1>No Hotels Found</h1>
         </div>
       )}
 
@@ -212,7 +212,7 @@ function Destinations() {
             height: "100vh",
           }}
         >
-          <h1>Error Fetching Destinations</h1>
+          <h1>Error Fetching Hotels</h1>
         </div>
       )}
       <StickyFooter />
@@ -220,4 +220,4 @@ function Destinations() {
   );
 }
 
-export default Destinations;
+export default Hotels;
