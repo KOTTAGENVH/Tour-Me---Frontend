@@ -105,19 +105,22 @@ function SignIn() {
             </Grid>
           </Grid>
           <Button
-            sx={{
-              marginTop: "5%",
-              color: "black",
-              border: "2px solid black",
-              borderRadius: "20px",
-              padding: "1%",
-              width: "30%",
-              fontSize: "clamp(1rem, 4vw, 1.2rem)", 
-            }}
-            onClick={onSubmit}
-          >
-            Submit
-          </Button>
+  sx={{
+    marginTop: "5%",
+    color: "black",
+    border: "2px solid black",
+    borderRadius: "20px",
+    padding: "1%",
+    minWidth: "100px", // Adjust as needed
+    maxWidth: "300px", // Adjust as needed
+    maxHeight: "60px", // Adjust as needed
+    fontSize: "clamp(1rem, 3vw, 1.2rem)", // Adjust the minimum, maximum, and default font size as needed
+  }}
+  onClick={onSubmit}
+>
+  Submit
+</Button>
+
 
           <a href="/forgot">
             <Typography
