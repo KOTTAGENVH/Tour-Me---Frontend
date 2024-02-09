@@ -4,11 +4,10 @@ import { signIn } from "../../Api/services/authService";
 import { ToastContainer, toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
 import { loginAction } from "../../Redux/auth/authAction";
-import { useDispatch,  } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,12 +22,12 @@ function SignIn() {
         toast.error("Please fill all the fields");
         return;
       }
-      const response = await dispatch(loginAction(username, password)); 
-      if(response === "success") {
-      navigate("/home", { replace: true });
-      toast.success("Sign In Successful");
-      setUsername("");
-      setPassword("");
+      const response = await dispatch(loginAction(username, password));
+      if (response === "success") {
+        navigate("/home", { replace: true });
+        toast.success("Sign In Successful");
+        setUsername("");
+        setPassword("");
       } else {
         toast.error("Sign In Failed");
       }
@@ -113,7 +112,7 @@ function SignIn() {
               borderRadius: "20px",
               padding: "1%",
               width: "30%",
-              fontSize: "1.2rem",
+              fontSize: "clamp(1rem, 4vw, 1.2rem)", 
             }}
             onClick={onSubmit}
           >
