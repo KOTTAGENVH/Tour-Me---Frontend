@@ -15,6 +15,7 @@ export const loginAction = (username, password) => {
     try {
       const response = await signIn(username, password)
       dispatch(setLoginResponse(response));
+      return "success";
   
     } catch (error) {
       dispatch(setMessage(error.response.data.message));

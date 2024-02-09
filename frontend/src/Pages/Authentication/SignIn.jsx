@@ -23,12 +23,15 @@ function SignIn() {
         toast.error("Please fill all the fields");
         return;
       }
-      dispatch(loginAction(username, password)); 
+      const response = await dispatch(loginAction(username, password)); 
+      if(response === "success") {
       navigate("/home", { replace: true });
       toast.success("Sign In Successful");
       setUsername("");
       setPassword("");
-
+      } else {
+        toast.error("Sign In Failed");
+      }
     } catch (err) {
       toast.error("Sign In Failed");
     }
