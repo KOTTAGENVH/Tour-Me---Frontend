@@ -15,6 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import Modal from "@mui/material/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import StarIcon from "@mui/icons-material/Star";
+import { useDispatch } from "react-redux";
 
 // Import Swiper styles
 import "swiper/css";
@@ -28,6 +29,7 @@ import {
 import { useQuery } from "react-query";
 import "../../../CSS/souvenierone.css";
 import { useNavigate } from "react-router-dom";
+import { setidAction } from "../../../Redux/idcapture/idcaptureAction";
 
 const labels = {
   0.5: "Useless",
@@ -52,6 +54,7 @@ function Viewonesouvenier() {
   const [hover, setHover] = React.useState(-1);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const storedid = useSelector((state) => state.id.id);
   const darkmode = useSelector((state) => state.darkmode.darkmode);
   const handleOpen = () => setOpenModal(true);
@@ -334,6 +337,11 @@ function Viewonesouvenier() {
                   "&:hover": {
                     backgroundColor: "red",
                   },
+                }}
+                onClick={() => {
+                  dispatch(setidAction(data?._id)).then(() => {
+                    navigate("/souvenierorder");
+                  });
                 }}
               >
                 Buy

@@ -1,4 +1,5 @@
 import { apiClient } from "../axios/api";
+import axios from 'axios';
 
 // Get all souveniers
 export const getAllsouveniers = async () => {
@@ -25,9 +26,38 @@ export const getSouvenierbyId = async (id) => {
 //Update souvenier rating
 export const updateSouvenierRating = async (id, rating) => {
   try {
-    const response = await apiClient.patch(
-      `/souvenier/update-rating/${id}`,
-      { rating }
+    const response = await apiClient.patch(`/souvenier/update-rating/${id}`, {
+      rating,
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+//create souvenier order
+export const createSouvenierOrder = async (
+  userid,
+  selleremail,
+  souvenierid,
+  useremail,
+  productname,
+  total,
+  date
+) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:5050/souvenier-order/create-souvenier-order",
+      {
+        userid,
+        selleremail,
+        souvenierid,
+        useremail,
+        productname,
+        state: "pending",
+        total,
+        date,
+      }
     );
     return response.data;
   } catch (error) {
