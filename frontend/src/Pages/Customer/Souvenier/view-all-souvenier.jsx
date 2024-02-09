@@ -63,14 +63,17 @@ function Souvenier() {
     setPage(newPage);
   };
 
+  let filteredSouveniers = [];
 
-  const filteredSouveniers = data?.filter(souvenier =>
-    souvenier.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    souvenier.maindescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    souvenier.price.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    souvenier.Address.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    souvenier.Address1.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  if (!isLoading && !isError && data !== undefined) {
+    filteredSouveniers = Array.isArray(data) ? data.filter(souvenir =>
+      souvenir.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      souvenir.maindescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      souvenir.price.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      souvenir.Address.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      souvenir.Address1.toLowerCase().includes(searchQuery.toLowerCase())
+    ) : [];
+  }
 
   return (
     <div
@@ -170,18 +173,22 @@ function Souvenier() {
           justifyContent: "center",
         }}
       >
-      {filteredSouveniers!==undefined && !isLoading && !isError && data?.length!==0 && filteredSouveniers
-          ?.slice((page - 1) * itemsPerPage, page * itemsPerPage)
-          ?.map((souvenier) => (
-            <Viewallcard
-              key={souvenier._id}
-              id={souvenier._id}
-              title={souvenier.title}
-              description={souvenier.maindescription}
-              image={souvenier.image}
-              price={souvenier.price}
-            />
-          ))}
+        {filteredSouveniers !== undefined &&
+          !isLoading &&
+          !isError &&
+          data?.length !== 0 &&
+          filteredSouveniers
+            ?.slice((page - 1) * itemsPerPage, page * itemsPerPage)
+            ?.map((souvenier) => (
+              <Viewallcard
+                key={souvenier._id}
+                id={souvenier._id}
+                title={souvenier.title}
+                description={souvenier.maindescription}
+                image={souvenier.image}
+                price={souvenier.price}
+              />
+            ))}
       </div>
       <div>
         {Array.from({ length: totalPages }).map((_, index) => (

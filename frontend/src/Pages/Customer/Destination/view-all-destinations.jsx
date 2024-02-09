@@ -64,13 +64,13 @@ function Destinations() {
   };
 
 
-  const filteredDestinations = data?.filter(destination =>
+  const filteredDestinations = Array.isArray(data) ? data?.filter(destination =>
     destination.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     destination.maindescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
     destination.price.toLowerCase().includes(searchQuery.toLowerCase()) ||
     destination.Address.toLowerCase().includes(searchQuery.toLowerCase()) ||
     destination.Address1.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  ) : [];
 
   return (
     <div

@@ -68,24 +68,28 @@ function Hotels() {
     setPage(newPage);
   };
 
-  const filteredHotels = data?.filter((hotels) => {
-    // Check if the hotel's category matches the selected category or if no category is selected
-    const categoryMatch = category === "" || hotels.category === category;
-  
-    // Apply other filters only if the category matches
-    if (categoryMatch) {
-      return (
-        hotels.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        hotels.maindescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        hotels.price.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        hotels.Address.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        hotels.Address1.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    } else {
-      // If the category doesn't match, exclude the hotel
-      return false;
-    }
-  });
+  const filteredHotels = Array.isArray(data)
+    ? data?.filter((hotels) => {
+        // Check if the hotel's category matches the selected category or if no category is selected
+        const categoryMatch = category === "" || hotels.category === category;
+
+        // Apply other filters only if the category matches
+        if (categoryMatch) {
+          return (
+            hotels.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            hotels.maindescription
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            hotels.price.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            hotels.Address.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            hotels.Address1.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+        } else {
+          // If the category doesn't match, exclude the hotel
+          return false;
+        }
+      })
+    : [];
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -104,41 +108,46 @@ function Hotels() {
           alignItems: "center",
         }}
       >
-  <FormControl
-    sx={{
-      backgroundColor: "rgba(255, 255, 255, 0.1)",
-      borderRadius: "20px",
-    }}
-  >
-    <InputLabel
-      id="demo-simple-select-label"
-      sx={{
-        color: handleDarkmode(),
-      }}
-    >
-      Category Filter
-    </InputLabel>
-    <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select-helper"
-      value={category}
-      label="Category"
-      onChange={(e) => setCategory(e.target.value)}
-      sx={{
-        backgroundColor: "rgba(255, 255, 255, 0.1)",
-        width: "120px",
-        borderRadius: "20px",
-        color: handleDarkmode(),
-      }}
-    >
-      <MenuItem value={""}> None </MenuItem>
-      {data!== undefined && !isError && !isLoading && data!==0 && data?.map((destination) => (
-        <MenuItem key={destination.category} value={destination.category}>
-          {destination.category}
-        </MenuItem>
-      ))}
-    </Select>
-  </FormControl>
+        <FormControl
+          sx={{
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            borderRadius: "20px",
+          }}
+        >
+          <InputLabel
+            id="demo-simple-select-label"
+            sx={{
+              color: handleDarkmode(),
+            }}
+          >
+            Category Filter
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select-helper"
+            value={category}
+            label="Category"
+            onChange={(e) => setCategory(e.target.value)}
+            sx={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              width: "120px",
+              borderRadius: "20px",
+              color: handleDarkmode(),
+            }}
+          >
+            <MenuItem value={""}> None </MenuItem>
+            {Array.isArray(data) &&
+              data.length > 0 &&
+              data.map((destination) => (
+                <MenuItem
+                  key={destination.category}
+                  value={destination.category}
+                >
+                  {destination.category}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
 
         <TextField
           id="search-hotels"
