@@ -336,6 +336,9 @@ function Viewonedestination() {
                     backgroundColor: "red",
                   },
                 }}
+                onClick={() => {
+                  navigate("/destinationorder");
+                }}
               >
                 Buy
               </DynamicTextButton>

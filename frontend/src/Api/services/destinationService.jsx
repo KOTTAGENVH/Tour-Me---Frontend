@@ -29,3 +29,37 @@ export const updatedestinationRating = async (id, rating) => {
     return error;
   }
 };
+
+//Create destination order
+export const createDestinationOrder = async (
+  userid,
+  selleremail,
+  destinationid,
+  useremail,
+  productname,
+  Totaltickets,
+  total,
+  datebook,
+  date
+) => {
+  try {
+    const status = "Booked";
+    const response =
+      await apiClient.post(`/destination-order/create-destination-order`, {
+        userid,
+        selleremail,
+        destinationid,
+        useremail,
+        productname,
+        status,
+        Totaltickets,
+        total,
+        datebook,
+        date,
+      });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+

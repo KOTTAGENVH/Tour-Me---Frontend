@@ -272,42 +272,41 @@ function Viewonehotel() {
               Contact: {data?.usertel} , {data?.useremail}
             </Typography>
             <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              margin: "20px",
-              color: handleDarkmode(),
-            
-            }}
-            >
-            <Rating
-              name="hover-feedback"
-              value={data?.rating}
-              precision={0.5}
-              getLabelText={getLabelText}
-              onChange={(event, newValue) => {
-                handleRatingupdate(newValue);
-              }}
-              onChangeActive={(event, newHover) => {
-                setHover(newHover);
-              }}
-              sx={{
+              style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 margin: "20px",
-                // color: handleDarkmode(),
+                color: handleDarkmode(),
               }}
-              emptyIcon={
-                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-              }
-            />
-            {data?.rating !== null && (
-              <Box sx={{ ml: 2, color: handleDarkmode() }}>
-                {labels[hover !== -1 ? hover : data?.rating]}
-              </Box>
-            )}
+            >
+              <Rating
+                name="hover-feedback"
+                value={data?.rating}
+                precision={0.5}
+                getLabelText={getLabelText}
+                onChange={(event, newValue) => {
+                  handleRatingupdate(newValue);
+                }}
+                onChangeActive={(event, newHover) => {
+                  setHover(newHover);
+                }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  margin: "20px",
+                  // color: handleDarkmode(),
+                }}
+                emptyIcon={
+                  <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                }
+              />
+              {data?.rating !== null && (
+                <Box sx={{ ml: 2, color: handleDarkmode() }}>
+                  {labels[hover !== -1 ? hover : data?.rating]}
+                </Box>
+              )}
             </div>
             <Stack
               spacing={0}
@@ -347,6 +346,9 @@ function Viewonehotel() {
                   "&:hover": {
                     backgroundColor: "red",
                   },
+                }}
+                onClick={() => {
+                  navigate("/hotelorder");
                 }}
               >
                 Buy

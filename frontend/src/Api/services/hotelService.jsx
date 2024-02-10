@@ -31,3 +31,34 @@ export const updatehotelRating = async (id, rating) => {
     return error;
   }
 };
+
+//Create hotel order
+export const createHotelOrder = async (
+  userid,
+  selleremail,
+  hotelid,
+  useremail,
+  TotalRooms,
+  total,
+  datebook,
+  date
+) => {
+  try {
+    const status = "Booked";
+    const response =
+      await apiClient.post(`/hotel-order/order-hotel-room`, {
+        userid,
+        selleremail,
+        hotelid,
+        useremail,
+        status,
+        TotalRooms,
+        total,
+        datebook,
+        date,
+      });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

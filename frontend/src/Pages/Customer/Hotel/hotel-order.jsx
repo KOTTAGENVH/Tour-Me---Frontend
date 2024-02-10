@@ -7,10 +7,6 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { useQuery } from "react-query";
 import Button from "@mui/material/Button";
-import {
-  createSouvenierOrder,
-  getSouvenierbyId,
-} from "../../../Api/services/souvenierService";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -22,13 +18,22 @@ import { RiVisaFill } from "react-icons/ri";
 import { FaCcMastercard } from "react-icons/fa";
 import { SiAmericanexpress } from "react-icons/si";
 import { ToastContainer, toast } from "react-toastify";
+import {
+  createHotelOrder,
+  getHotelById,
+} from "../../../Api/services/hotelService";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
-function Souvenierorder() {
+function Hotelorder() {
   const [progress, setProgress] = React.useState(0);
   const [quantity, setQuantity] = React.useState(0);
   const [cardNumber, setCardNumber] = React.useState("");
   const [cardType, setCardType] = React.useState("");
   const [sending, setSending] = React.useState(false);
+  const [datebook, setDatebook] = React.useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,14 +55,20 @@ function Souvenierorder() {
   }, []);
 
   const { data, isLoading, error, isError } = useQuery({
-    queryFn: () => getSouvenierbyId(storedid),
+    queryFn: () => getHotelById(storedid),
   });
 
-  const handleSouvenierOrderSubmit = async () => {
+  const handleHotelOrderSubmit = async () => {
     if (quantity === 0) {
       toast.error("Please enter a valid quantity");
       return;
     }
+
+    if (datebook === null || datebook === "") {
+      toast.error("Please book a date for the hotel room");
+      return;
+    }
+
     setSending(true);
     try {
       const currentDate = new Date();
@@ -66,24 +77,25 @@ function Souvenierorder() {
       const year = currentDate.getFullYear();
       const formattedDate = `${day}/${month}/${year}`;
 
-      const response = await createSouvenierOrder(
+      const response = await createHotelOrder(
         userid,
         data?.useremail,
         data?._id,
         useremail,
-        data?.title,
         quantity,
+        data?.price * quantity,
+        datebook,
         formattedDate
       ).then(() => {
-        setSending(false); 
-        toast.success("Souvenir Order Added", {
-          onClose: () => navigate("/home")
+        setSending(false);
+        toast.success("Hotel Booked", {
+          onClose: () => navigate("/home"),
         });
       });
     } catch (error) {
-        console.log("Error in Adding Souvenier Order", error)
-      toast.error("Error in Adding Souvenier Order");
-        setSending(false);
+      console.log("Error in Adding Hotel Order", error);
+      toast.error("Error in Adding Hotel Order");
+      setSending(false);
     }
   };
 
@@ -92,7 +104,7 @@ function Souvenierorder() {
     if (
       !isNaN(newQuantity) &&
       newQuantity >= 0 &&
-      newQuantity <= data?.Quatity
+      newQuantity <= data?.NoRooms
     ) {
       // Update quantity state only if it's a valid number and within the range
       setQuantity(newQuantity);
@@ -243,7 +255,7 @@ function Souvenierorder() {
               <IconButton
                 onClick={() => {
                   dispatch(setidAction(data?._id)).then(() => {
-                    navigate("/viewone/souvenier");
+                    navigate("/viewone/hotel");
                   });
                 }}
                 style={{
@@ -265,6 +277,40 @@ function Souvenierorder() {
               WebkitBackdropFilter: "blur( 5px )",
             }}
           >
+            <LocalizationProvider
+              dateAdapter={AdapterDayjs}
+              style={{
+                color: handleDarkmode(),
+                width: "100%",
+              }}
+            >
+              <DatePicker
+                label="Booking Date"
+                fullWidth
+                value={datebook}
+                onChange={(newValue) => {
+                  setDatebook(newValue);
+                }}
+                variant="standard"
+                sx={{ color: handleDarkmode(), margin: "20px", width: "98.5%" }}
+                InputLabelProps={{
+                  shrink: true,
+                  sx: { color: handleDarkmode() },
+                }}
+                InputProps={{
+                  sx: { color: handleDarkmode() },
+                }}
+                format="DD MMMM YYYY" // Set the format of the displayed date
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    value={
+                      datebook ? dayjs(datebook).format("DD MMMM YYYY") : ""
+                    }
+                  />
+                )}
+              />
+            </LocalizationProvider>
             <TextField
               id="standard-number"
               label="Quantity"
@@ -407,7 +453,7 @@ function Souvenierorder() {
                   marginBottom: "20px",
                 }}
                 disabled={sending}
-                onClick={handleSouvenierOrderSubmit}
+                onClick={handleHotelOrderSubmit}
               >
                 Pay
               </DynamicTextButton>
@@ -420,4 +466,4 @@ function Souvenierorder() {
   );
 }
 
-export default Souvenierorder;
+export default Hotelorder;
