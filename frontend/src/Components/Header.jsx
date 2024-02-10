@@ -5,13 +5,11 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
+import RoofingIcon from "@mui/icons-material/Roofing";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
@@ -23,8 +21,15 @@ import { setdarkmode } from "../Redux/darkmode/darkmodeAction";
 import { useDispatch } from "react-redux";
 import { signOutAction } from "../Redux/auth/authAction";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const settings = ["Profile", "My Orders", "About Sri lanka", "Aiports(LK)" , "Logout"];
+const settings = [
+  "Profile",
+  "My Orders",
+  "About Sri lanka",
+  "Aiports(LK)",
+  "Logout",
+];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -33,10 +38,13 @@ function Header() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loggedUser = useSelector((state) => state.auth.loggedUser);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
+    navigate("/home");
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -56,7 +64,7 @@ function Header() {
 
   const handleMenuItemClick = (setting) => {
     handleCloseUserMenu();
-  
+
     if (setting === "Logout") {
       dispatch(signOutAction());
       handleCloseUserMenu();
@@ -67,19 +75,18 @@ function Header() {
     } else if (setting === "About Sri lanka") {
       handleCloseUserMenu();
       navigate("/about-Sri-Lanka");
-    } else if (setting === "Aiports(LK)"){
+    } else if (setting === "Aiports(LK)") {
       navigate("/airports");
       handleCloseUserMenu();
     } else {
       handleCloseUserMenu();
     }
   };
-  
 
   return (
     <AppBar
-       position="static"
-     sx={{
+      position="static"
+      sx={{
         backgroundColor: "transparent",
         backdropFilter: "blur(60px)",
         boxShadow: "none",
@@ -140,7 +147,7 @@ function Header() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <RoofingIcon />
             </IconButton>
           </Box>
 
@@ -154,7 +161,10 @@ function Header() {
           >
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt={loggedUser?.username}
+                  src="/static/images/avatar/2.jpg"
+                />
               </IconButton>
             </Tooltip>
             <Menu

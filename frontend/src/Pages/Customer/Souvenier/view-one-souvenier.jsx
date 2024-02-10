@@ -92,7 +92,7 @@ function Viewonesouvenier() {
       const adjustTextSize = () => {
         if (!button) return; // Check if button exists
         const maxWidth = button.offsetWidth;
-        const fontSize = 20; // Initial font size
+        let fontSize = 20; // Initial font size
         const text = button.querySelector("span");
         if (!text) return; // Check if text element exists
         const originalText = text.innerText;

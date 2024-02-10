@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../../Components/Header";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
@@ -40,7 +39,6 @@ function Souvenier() {
     queryFn: () => getAllsouveniers(),
   });
 
-  const navigate = useNavigate();
   const handleDarkmode = () => {
     if (darkmode) {
       return "white";

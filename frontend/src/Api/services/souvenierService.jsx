@@ -1,5 +1,4 @@
 import { apiClient } from "../axios/api";
-import axios from "axios";
 
 // Get all souveniers
 export const getAllsouveniers = async () => {

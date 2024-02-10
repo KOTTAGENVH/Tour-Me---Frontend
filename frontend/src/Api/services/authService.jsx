@@ -1,4 +1,3 @@
-import axios from "axios";
 import { apiClient } from "../axios/api";
 
 //Authentication Sign Up
