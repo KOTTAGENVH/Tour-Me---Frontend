@@ -18,6 +18,7 @@ import Viewonesouvenier from "./Pages/Customer/Souvenier/view-one-souvenier";
 import Souvenierorder from "./Pages/Customer/Souvenier/souvenier-order";
 import Hotelorder from "./Pages/Customer/Hotel/hotel-order";
 import DestinationOrder from "./Pages/Customer/Destination/destination-order";
+import Profile from "./Pages/Customer/profile";
 function App() {
   const loggedUser = useSelector((state) => state.auth.loggedUser);
   const darkmode = useSelector((state) => state.darkmode.darkmode);
@@ -44,6 +45,7 @@ function App() {
               <Route path="/hotels" element={<Hotels />} />
               <Route path="/souveniers" element={<Souvenier />} />
               <Route path="/airports" element={<Airports />} />
+              <Route path="/profile" element={<Profile />} />
               <Route
                 path="/viewone/destination"
                 element={<Viewonedestination />}

@@ -69,7 +69,7 @@ function Header() {
       dispatch(signOutAction());
       handleCloseUserMenu();
     } else if (setting === "Profile") {
-      handleCloseUserMenu();
+      navigate("/profile");
     } else if (setting === "My Orders") {
       handleCloseUserMenu();
     } else if (setting === "About Sri lanka") {
