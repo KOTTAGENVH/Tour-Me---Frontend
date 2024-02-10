@@ -1,5 +1,5 @@
 import { apiClient } from "../axios/api";
-import axios from 'axios';
+import axios from "axios";
 
 // Get all souveniers
 export const getAllsouveniers = async () => {
@@ -46,8 +46,8 @@ export const createSouvenierOrder = async (
   date
 ) => {
   try {
-    const response = await axios.post(
-      "http://localhost:5050/souvenier-order/create-souvenier-order",
+    const response = await apiClient.post(
+      `/souvenier-order/create-souvenier-order`,
       {
         userid,
         selleremail,
