@@ -71,7 +71,7 @@ function Header() {
     } else if (setting === "Profile") {
       navigate("/profile");
     } else if (setting === "My Orders") {
-      handleCloseUserMenu();
+      navigate("/viewallorders");
     } else if (setting === "About Sri lanka") {
       handleCloseUserMenu();
       navigate("/about-Sri-Lanka");

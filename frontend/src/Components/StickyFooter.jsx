@@ -19,7 +19,7 @@ function StickyFooter() {
         left: 0,
       }}
     >
-        <span>&copy; 2024 Nowen Kottage. All rights reserved. Contact: nowenportfolio@gmail.com</span>
+        <span>&copy; 2024 Nowen Kottage. Coding rights reserved. Contact: nowenportfolio@gmail.com</span>
     </Box>
   );
 }

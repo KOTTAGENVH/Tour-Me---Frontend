@@ -13,7 +13,9 @@ export const getAlldestinations = async () => {
 //Get destination by id
 export const getDestinationById = async (id) => {
   try {
-    const response = await apiClient.get(`/destination/get-destination-by-id/${id}`);
+    const response = await apiClient.get(
+      `/destination/get-destination-by-id/${id}`
+    );
     return response.data;
   } catch (error) {
     return error;
@@ -23,7 +25,9 @@ export const getDestinationById = async (id) => {
 //Update Rating
 export const updatedestinationRating = async (id, rating) => {
   try {
-    const response = await apiClient.patch(`/destination/update-rating/${id}`, { rating });
+    const response = await apiClient.patch(`/destination/update-rating/${id}`, {
+      rating,
+    });
     return response.data;
   } catch (error) {
     return error;
@@ -44,8 +48,9 @@ export const createDestinationOrder = async (
 ) => {
   try {
     const status = "Booked";
-    const response =
-      await apiClient.post(`/destination-order/create-destination-order`, {
+    const response = await apiClient.post(
+      `/destination-order/create-destination-order`,
+      {
         userid,
         selleremail,
         destinationid,
@@ -56,10 +61,22 @@ export const createDestinationOrder = async (
         total,
         datebook,
         date,
-      });
+      }
+    );
     return response.data;
   } catch (error) {
     return error;
   }
 };
 
+//Get all destination orders by user email
+export const getDestinationOrdersByUseremail = async (useremail) => {
+  try {
+    const response = await apiClient.get(
+      `/destination-order/get-destination-order-by-user-email/${useremail}`
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

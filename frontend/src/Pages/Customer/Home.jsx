@@ -105,7 +105,8 @@ function Home() {
           Api. The main motive of this project is to give the user a platform
           where they can find details of Sri - Lanka and also book hotels,
           destinations and purchase souvenirs. Also give suggestions to local
-          taxi firms.Pls note that this is a DEMO.
+          taxi firms.Pls note that this is a DEMO. Note: Images and text were taken 
+          from the internet.{" "}
         </Typography>
       </Box>
 

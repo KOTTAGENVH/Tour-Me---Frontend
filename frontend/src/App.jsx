@@ -19,6 +19,7 @@ import Souvenierorder from "./Pages/Customer/Souvenier/souvenier-order";
 import Hotelorder from "./Pages/Customer/Hotel/hotel-order";
 import DestinationOrder from "./Pages/Customer/Destination/destination-order";
 import Profile from "./Pages/Customer/profile";
+import Viewallorder from "./Pages/Customer/view-all-orders";
 function App() {
   const loggedUser = useSelector((state) => state.auth.loggedUser);
   const darkmode = useSelector((state) => state.darkmode.darkmode);
@@ -55,6 +56,7 @@ function App() {
               <Route path="/souvenierorder" element={<Souvenierorder />} />
               <Route path="/hotelorder" element={<Hotelorder />} />
               <Route path="/destinationorder" element={<DestinationOrder />} />
+              <Route path="/viewallorders" element={<Viewallorder />} />
             </>
           )}
         </Routes>

@@ -63,3 +63,31 @@ export const createSouvenierOrder = async (
     return error;
   }
 };
+
+//get all souvenier orders by useremail
+export const getSouvenierOrdersByUseremail = async (useremail) => {
+  try {
+    const response = await apiClient.get(
+      `/souvenier-order/get-souvenier-order-by-useremail/${useremail}`
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+
+//Update souvenier order
+export const updateSouvenierOrder = async (id,status) => {
+  try {
+    const response = await apiClient.patch(
+      `/souvenier-order/update-souvenier-order/${id}`,
+      {
+        state: status,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

@@ -45,18 +45,29 @@ export const createHotelOrder = async (
 ) => {
   try {
     const status = "Booked";
-    const response =
-      await apiClient.post(`/hotel-order/order-hotel-room`, {
-        userid,
-        selleremail,
-        hotelid,
-        useremail,
-        status,
-        TotalRooms,
-        total,
-        datebook,
-        date,
-      });
+    const response = await apiClient.post(`/hotel-order/order-hotel-room`, {
+      userid,
+      selleremail,
+      hotelid,
+      useremail,
+      status,
+      TotalRooms,
+      total,
+      datebook,
+      date,
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+//Get hotel orders by seller email
+export const getHotelOrdersByUserid = async (userid) => {
+  try {
+    const response = await apiClient.get(
+      `/hotel-order/get-hotel-order-by-userid/${userid}`
+    );
     return response.data;
   } catch (error) {
     return error;
