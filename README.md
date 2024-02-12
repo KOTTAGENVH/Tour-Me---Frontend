@@ -7,6 +7,7 @@
 >This is a small project done by me(Nowen Kottage) using the MERN stack, Redux, Rapid Api. The main motive of this project is to give the user a platform where they can find details of Sri - Lanka and also book hotels, destinations and purchase souvenirs. Also give suggestions to local taxi firms.Pls note that this is a DEMO. Note: Images and text were taken from the internet.
 >>
 >Demo hosted Link: https://tour-me-frontend.vercel.app
+>>
 >Demo video Link:
 >>
 #Instructions to setup the project
