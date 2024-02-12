@@ -1,4 +1,4 @@
-# Tour-Me---Frontend (Customer Demo)
+# Tour-Me---Frontend (Customer side Demo)
 
 <img width="1660" alt="Screenshot 2024-02-12 at 22 55 53" src="https://github.com/KOTTAGENVH/Tour-Me---Frontend-Customer/assets/87430226/9aa8bc0d-bf2b-496b-a16f-8c1c2c54de6c">
 
