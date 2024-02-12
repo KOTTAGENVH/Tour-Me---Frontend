@@ -8,7 +8,7 @@
 >>
 >Demo hosted Link: https://tour-me-frontend.vercel.app
 >>
->Demo video Link:
+>Demo video Link: https://youtu.be/y4AbhGJEGm0?si=PBugSTVUDBxlqvf1
 >>
 #Instructions to setup the project
 >
