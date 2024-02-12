@@ -155,21 +155,7 @@ function SignUp() {
                       justifyContent: "center",
                     }}
                   >
-                    <FormControlLabel
-                      value="souvenir"
-                      control={<Radio />}
-                      label="Souvenir Shop"
-                    />
-                    <FormControlLabel
-                      value="hotel"
-                      control={<Radio />}
-                      label="Hotel"
-                    />
-                    <FormControlLabel
-                      value="destination"
-                      control={<Radio />}
-                      label="Destination"
-                    />
+
                     <FormControlLabel
                       value="customer"
                       control={<Radio />}
