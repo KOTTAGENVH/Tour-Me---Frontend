@@ -13,8 +13,14 @@
 #Instructions to setup the project
 >
 >Run npm i || npm install to install dependencies
+>
 >Then run npm start
+>
 >The react app would run in localhost 3000
+>
 >Sign up as a customer or sign in using these exsisting customer credential below
+>
 >Email: customer@yahoo.com
+>
 >Password: Customer@123
+>
