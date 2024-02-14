@@ -22,7 +22,7 @@ import { useDispatch } from "react-redux";
 import { signOutAction } from "../Redux/auth/authAction";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import  { Redirect } from 'react-router-dom'
+
 
 const settings = [
   "Profile",
@@ -43,7 +43,6 @@ function Header() {
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-    <Redirect to='/hi'  />
   };
 
   const handleOpenUserMenu = (event) => {
