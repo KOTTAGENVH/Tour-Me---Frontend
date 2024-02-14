@@ -43,6 +43,7 @@ function Header() {
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
+    navigate("/home");
   };
 
   const handleOpenUserMenu = (event) => {
