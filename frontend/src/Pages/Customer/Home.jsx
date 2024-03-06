@@ -22,6 +22,7 @@ import Footer from "../../Components/Footer";
 
 function Home() {
   const darkmode = useSelector((state) => state.darkmode.darkmode);
+  const loggedUser = useSelector((state) => state.auth.loggedUser);
   const [isHovered, setHovered] = useState(false);
   const [isHovered1, setHovered1] = useState(false);
   const [isHovered2, setHovered2] = useState(false);

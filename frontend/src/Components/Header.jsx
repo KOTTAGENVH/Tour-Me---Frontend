@@ -25,6 +25,7 @@ import { useSelector } from "react-redux";
 
 
 const settings = [
+  "Home",
   "Profile",
   "My Orders",
   "About Sri lanka",
@@ -70,6 +71,8 @@ function Header() {
       dispatch(signOutAction());
       navigate("/");
       handleCloseUserMenu();
+    } else if (setting === "Home") {
+      navigate("/home")
     } else if (setting === "Profile") {
       navigate("/profile");
     } else if (setting === "My Orders") {
