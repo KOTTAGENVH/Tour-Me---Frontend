@@ -48,7 +48,7 @@ function Airports() {
     flexingdirec = "row";
   }
 
-  const filteredAirports = data?.filter(
+  const filteredAirports = data && Array.isArray(data) ? data.filter(
     (airport) =>
       (airport.name &&
         airport.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -66,7 +66,7 @@ function Airports() {
         airport.display_subtitle
           .toLowerCase()
           .includes(searchQuery.toLowerCase()))
-  );
+  ) : [];
 
   return (
     <div
@@ -162,7 +162,7 @@ function Airports() {
           justifyContent: "center",
         }}
       >
-        {filteredAirports?.length > 0 ? (
+        {filteredAirports?.length > 0 && !isError ? (
           filteredAirports.map((airport) => (
             <AirportCard
               key={airport.code}
