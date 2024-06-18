@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../Components/Header";
 import Box from "@mui/system/Box";
 import Typography from "@mui/material/Typography";
@@ -25,6 +25,7 @@ function Home() {
   const [isHovered, setHovered] = useState(false);
   const [isHovered1, setHovered1] = useState(false);
   const [isHovered2, setHovered2] = useState(false);
+const [isboxwidth, setBoxWidth] = useState("390px");
 
   const navigate = useNavigate();
   const handleDarkmode = () => {
@@ -36,12 +37,21 @@ function Home() {
   };
 
   let flexingdirec;
-
   if (window.innerWidth <= 1024 && window.innerHeight <= 1366) {
     flexingdirec = "column";
-  } else {
+
+    } else {
     flexingdirec = "row";
-  }
+
+    }
+  useEffect(() => {
+    // Run once when component mounts
+    if (window.innerWidth <= 1024 && window.innerHeight <= 1366) {
+      setBoxWidth("290px");
+    } else {
+      setBoxWidth("390px");
+    }
+  }, []);
 
   return (
     <div >
@@ -125,7 +135,7 @@ function Home() {
             zIndex: 1,
             justifyContent: "center",
             alignItems: "center",
-            width: "390px",
+            width: isboxwidth,
             height: "300px",
             margin: "auto",
             marginTop: "20px",
@@ -191,7 +201,7 @@ function Home() {
             zIndex: 1,
             justifyContent: "center",
             alignItems: "center",
-            width: "390px",
+            width: isboxwidth,
             height: "300px",
             margin: "auto",
             marginTop: "20px",
@@ -256,7 +266,7 @@ function Home() {
             zIndex: 1,
             justifyContent: "center",
             alignItems: "center",
-            width: "390px",
+            width: isboxwidth,
             height: "300px",
             margin: "auto",
             marginTop: "20px",
