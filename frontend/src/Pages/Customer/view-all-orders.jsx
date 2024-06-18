@@ -4,7 +4,6 @@ import StickyFooter from "../../Components/StickyFooter";
 import Stack from "@mui/material/Stack";
 import { useRef, useEffect } from "react";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Typography from "@mui/material/Typography";
 import ViewSouvenierOrder from "./Souvenier/view-souvenier-order";
@@ -17,8 +16,6 @@ function Viewallorder() {
   const [calldestination, setCallDestination] = React.useState(false);
 
   const darkmode = useSelector((state) => state.darkmode.darkmode);
-  const loggedUser = useSelector((state) => state.auth.loggedUser);
-  const navigate = useNavigate();
 
   const handleDarkmode = () => {
     if (darkmode) {
@@ -36,7 +33,7 @@ function Viewallorder() {
       const adjustTextSize = () => {
         if (!button) return; // Check if button exists
         const maxWidth = button.offsetWidth;
-        const fontSize = 20; // Initial font size
+        var fontSize = 20; // Initial font size
         const text = button.querySelector("span");
         if (!text) return; // Check if text element exists
         const originalText = text.innerText;

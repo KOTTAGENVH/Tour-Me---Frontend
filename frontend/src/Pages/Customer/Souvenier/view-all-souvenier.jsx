@@ -35,7 +35,7 @@ function Souvenier() {
     setItemsPerPage(isMobile ? 2 : 10);
   }, []);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: () => getAllsouveniers(),
   });
 

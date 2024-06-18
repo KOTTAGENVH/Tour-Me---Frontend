@@ -54,7 +54,7 @@ function DestinationOrder() {
     };
   }, []);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: () => getDestinationById(storedid),
   });
 
@@ -77,7 +77,7 @@ function DestinationOrder() {
       const year = currentDate.getFullYear();
       const formattedDate = `${day}/${month}/${year}`;
 
-      const response = await createDestinationOrder(
+       await createDestinationOrder(
         userid,
         data?.useremail,
         data?._id,
@@ -128,7 +128,7 @@ function DestinationOrder() {
       const adjustTextSize = () => {
         if (!button) return; // Check if button exists
         const maxWidth = button.offsetWidth;
-        const fontSize = 20; // Initial font size
+        var fontSize = 20; // Initial font size
         const text = button.querySelector("span");
         if (!text) return; // Check if text element exists
         const originalText = text.innerText;

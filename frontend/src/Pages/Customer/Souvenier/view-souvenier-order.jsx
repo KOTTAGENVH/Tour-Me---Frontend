@@ -22,8 +22,6 @@ import { useNavigate } from "react-router-dom";
 import { setidAction } from "../../../Redux/idcapture/idcaptureAction";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { ToastContainer, toast } from "react-toastify";
 import Chip from '@mui/material/Chip';
@@ -38,7 +36,7 @@ function ViewSouvenierOrder() {
   const loggedUser = useSelector((state) => state.auth.loggedUser);
   const darkmode = useSelector((state) => state.darkmode.darkmode);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data} = useQuery({
     queryFn: () => getSouvenierOrdersByUseremail(loggedUser?.email),
   });
 

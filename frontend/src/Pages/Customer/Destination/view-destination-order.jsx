@@ -6,7 +6,6 @@ import {
 } from "material-react-table";
 import IconButton from "@mui/material/IconButton";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -17,8 +16,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setidAction } from "../../../Redux/idcapture/idcaptureAction";
-import { ToastContainer, toast } from "react-toastify";
-import Chip from "@mui/material/Chip";
+import { ToastContainer } from "react-toastify";
 import { getDestinationOrdersByUseremail } from "../../../Api/services/destinationService";
 
 function ViewDestinationOrder() {
@@ -30,7 +28,7 @@ function ViewDestinationOrder() {
   const loggedUser = useSelector((state) => state.auth.loggedUser);
   const darkmode = useSelector((state) => state.darkmode.darkmode);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: () => getDestinationOrdersByUseremail(loggedUser?.email),
   });
 

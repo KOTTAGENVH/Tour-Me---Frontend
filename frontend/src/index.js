@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { Provider } from "react-redux";
@@ -11,7 +11,10 @@ import { QueryClient, QueryClientProvider } from "react-query";
 const persistor = persistStore(store);
 const queryClient = new QueryClient();
 
-ReactDOM.render(
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
@@ -20,6 +23,5 @@ ReactDOM.render(
         </PersistGate>
       </Provider>
     </QueryClientProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );

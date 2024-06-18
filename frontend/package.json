@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ap.cx/react-fullpage": "^0.3.0",
     "@coreui/react": "^4.11.1",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
@@ -21,7 +20,6 @@
     "axios": "^1.6.3",
     "dayjs": "^1.11.10",
     "formik": "^2.4.5",
-    "fullpage.js": "^4.0.20",
     "material-react-table": "^2.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

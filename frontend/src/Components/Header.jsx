@@ -34,7 +34,6 @@ const settings = [
 ];
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [darkMode, setDarkMode] = React.useState(false);
 
@@ -43,16 +42,11 @@ function Header() {
   const loggedUser = useSelector((state) => state.auth.loggedUser);
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
     navigate("/home");
   };
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {

@@ -49,7 +49,7 @@ function Souvenierorder() {
     };
   }, []);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: () => getSouvenierbyId(storedid),
   });
 
@@ -66,7 +66,7 @@ function Souvenierorder() {
       const year = currentDate.getFullYear();
       const formattedDate = `${day}/${month}/${year}`;
 
-      const response = await createSouvenierOrder(
+       await createSouvenierOrder(
         userid,
         data?.useremail,
         data?._id,
@@ -115,7 +115,7 @@ function Souvenierorder() {
       const adjustTextSize = () => {
         if (!button) return; // Check if button exists
         const maxWidth = button.offsetWidth;
-        const fontSize = 20; // Initial font size
+        var fontSize = 20; // Initial font size
         const text = button.querySelector("span");
         if (!text) return; // Check if text element exists
         const originalText = text.innerText;

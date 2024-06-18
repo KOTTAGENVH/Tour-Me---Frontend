@@ -69,7 +69,7 @@ function Viewonehotel() {
     };
   }, []);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: () => getHotelById(storedid),
   });
 
@@ -89,7 +89,7 @@ function Viewonehotel() {
       const adjustTextSize = () => {
         if (!button) return; // Check if button exists
         const maxWidth = button.offsetWidth;
-        const fontSize = 20; // Initial font size
+        var fontSize = 20; // Initial font size
         const text = button.querySelector("span");
         if (!text) return; // Check if text element exists
         const originalText = text.innerText;

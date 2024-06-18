@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../../Components/Header";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
@@ -41,11 +40,11 @@ function Hotels() {
     setItemsPerPage(isMobile ? 2 : 10);
   }, []);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: () => getallhotels(),
   });
 
-  const navigate = useNavigate();
+ 
   const handleDarkmode = () => {
     if (darkmode) {
       return "white";

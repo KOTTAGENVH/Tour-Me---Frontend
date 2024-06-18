@@ -72,7 +72,7 @@ function Viewonesouvenier() {
     };
   }, []);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: () => getSouvenierbyId(storedid),
   });
 

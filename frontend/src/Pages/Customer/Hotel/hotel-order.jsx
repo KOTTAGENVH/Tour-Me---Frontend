@@ -54,7 +54,7 @@ function Hotelorder() {
     };
   }, []);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: () => getHotelById(storedid),
   });
 
@@ -77,7 +77,7 @@ function Hotelorder() {
       const year = currentDate.getFullYear();
       const formattedDate = `${day}/${month}/${year}`;
 
-      const response = await createHotelOrder(
+       await createHotelOrder(
         userid,
         data?.useremail,
         data?._id,
@@ -127,7 +127,7 @@ function Hotelorder() {
       const adjustTextSize = () => {
         if (!button) return; // Check if button exists
         const maxWidth = button.offsetWidth;
-        const fontSize = 20; // Initial font size
+        var fontSize = 20; // Initial font size
         const text = button.querySelector("span");
         if (!text) return; // Check if text element exists
         const originalText = text.innerText;

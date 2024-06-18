@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../Components/Header";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { allSriLankanAirports } from "../../Api/services/airportService";
 import { useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
@@ -15,7 +14,7 @@ function Airports() {
   const [searchQuery, setSearchQuery] = useState("");
   const darkmode = useSelector((state) => state.darkmode.darkmode);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prevProgress) =>
         prevProgress >= 100 ? 0 : prevProgress + 10
@@ -27,11 +26,10 @@ function Airports() {
     };
   }, []);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: () => allSriLankanAirports(),
   });
 
-  const navigate = useNavigate();
   const handleDarkmode = () => {
     if (darkmode) {
       return "white";

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Box, Typography, TextField, Grid, Button } from "@mui/material";
-import { signIn } from "../../Api/services/authService";
 import { ToastContainer, toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
 import { loginAction } from "../../Redux/auth/authAction";
@@ -18,7 +17,9 @@ function SignIn() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       if (!username && !password) {
+        setLoading(false);
         toast.error("Please fill all the fields");
         return;
       }
@@ -28,11 +29,14 @@ function SignIn() {
         toast.success("Sign In Successful");
         setUsername("");
         setPassword("");
+        setLoading(false);
       } else {
         toast.error("Sign In Failed");
+        setLoading(false);
       }
     } catch (err) {
       toast.error("Sign In Failed");
+      setLoading(false);
     }
   };
 

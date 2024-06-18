@@ -2,12 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Define a function to fetch the initial state
 const getInitialAuthState = () => {
-  const persistedState = localStorage.getItem("persistroot");
+  const persistedState = localStorage.getItem("persist:root");
   if (persistedState) {
-    console.log("JSON.parse(persistedState)", JSON.parse(persistedState.auth));
-    return JSON.parse(persistedState);
+    const parsedState = JSON.parse(persistedState);
+    return parsedState.auth || {}; // Assuming your persisted state has an 'auth' property
   }
-
 
   return {
     message: "",
@@ -27,38 +26,38 @@ export const authSlice = createSlice({
   initialState: getInitialAuthState(),
   reducers: {
     setLoginResponse: (state, action) => {
-      return {
-        ...state,
-        loggedUser: action.payload.loggedUser,
-        message: action.payload.message,
-      };
+      state.loggedUser = action.payload.loggedUser;
+      state.message = action.payload.message;
     },
     setMessage: (state, action) => {
       state.message = action.payload;
     },
     clearMessage: (state) => {
       state.message = "";
-      state.logOutMessage = "";
     },
-    logOut: (state, action) => {
-      state.username = "";
-      state.email = "";
-      state.role = "";
-      state.approved = "";
-      state.secretcode = "";
-      state.block = "";
+    logOut: (state) => {
+      // Reset auth state on logout
+      state.loggedUser = {};
+      state.message = "";
     },
-
-    //Sign Out
-    resetState: (state) => {
-      localStorage.removeItem("persistroot");
-      const initialState = getInitialAuthState();
-      Object.keys(initialState).forEach((key) => {
-        state[key] = initialState[key];
-      });
+    resetState: () => {
+      // Clear entire Redux state on reset
+      localStorage.removeItem("persist:root");
+      return {
+        message: "",
+        loggedUser: {
+          _id: "",
+          username: "",
+          email: "",
+          role: "",
+          secretcode: "",
+          block: "",
+        },
+      };
     },
   },
 });
+
 export const {
   setLoginResponse,
   logOut,
@@ -66,4 +65,5 @@ export const {
   clearMessage,
   resetState,
 } = authSlice.actions;
+
 export default authSlice.reducer;
