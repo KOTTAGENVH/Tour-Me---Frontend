@@ -1,27 +1,22 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { useQuery } from "react-query";
-import {
-  MaterialReactTable,
-  useMaterialReactTable,
-} from "material-react-table";
+import { MaterialReactTable, useMaterialReactTable } from "material-react-table";
 import IconButton from "@mui/material/IconButton";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setidAction } from "../../../Redux/idcapture/idcaptureAction";
 import { ToastContainer } from "react-toastify";
 import { getDestinationOrdersByUseremail } from "../../../Api/services/destinationService";
+import dayjs from "dayjs"; // Import dayjs for date handling
 
 function ViewDestinationOrder() {
   const [selectedDate, setSelectedDate] = useState(null);
-  const [progress, setProgress] = React.useState(0);
+  const [progress, setProgress] = useState(0);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,30 +31,21 @@ function ViewDestinationOrder() {
     setSelectedDate(date);
   };
 
-  let formattedSelectedDate = null;
+  const filteredData = data || [];
 
-  if (selectedDate) {
-    const dateObject = new Date(selectedDate);
-    formattedSelectedDate = dateObject.toLocaleDateString("en-GB");
-  }
+  const filteredResults = useMemo(() => {
+    if (!selectedDate) return filteredData;
 
-  // Apply filter function to the data if data is available
-  const filteredData = data ?? []; // Providing a default value for data
+    const formattedSelectedDate = dayjs(selectedDate).format("DD/MM/YYYY");
 
-  // Only filter data if the selected date is defined
-  const filteredResults = selectedDate
-    ? filteredData.filter((item) => {
-        // Format item date to DD/MM/YYYY
-        // const itemDate = item.date.split("/").reverse().join("/");
-        return item?.date === formattedSelectedDate;
-      })
-    : filteredData;
+    return filteredData.filter((item) => {
+      const itemDate = dayjs(item.date, "DD/MM/YYYY").format("DD/MM/YYYY");
+      return itemDate === formattedSelectedDate;
+    });
+  }, [filteredData, selectedDate]);
+
   const handleDarkmode = () => {
-    if (darkmode) {
-      return "white";
-    } else {
-      return "black";
-    }
+    return darkmode ? "white" : "black";
   };
 
   const columns = useMemo(
@@ -162,7 +148,7 @@ function ViewDestinationOrder() {
           <CircularProgress variant="determinate" value={progress} />
         </div>
       )}
-      <MaterialReactTable table={table} />;
+      <MaterialReactTable table={table} />
     </div>
   );
 }

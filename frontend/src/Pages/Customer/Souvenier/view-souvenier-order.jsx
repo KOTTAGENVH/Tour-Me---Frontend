@@ -1,23 +1,14 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { useQuery } from "react-query";
-import {
-  MaterialReactTable,
-  useMaterialReactTable,
-} from "material-react-table";
+import { MaterialReactTable, useMaterialReactTable } from "material-react-table";
 import IconButton from "@mui/material/IconButton";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import Button from "@mui/material/Button";
-import { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useMemo } from "react";
-import {
-  getSouvenierOrdersByUseremail,
-  updateSouvenierOrder,
-} from "../../../Api/services/souvenierService";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { getSouvenierOrdersByUseremail, updateSouvenierOrder } from "../../../Api/services/souvenierService";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setidAction } from "../../../Redux/idcapture/idcaptureAction";
 import Dialog from "@mui/material/Dialog";
@@ -25,6 +16,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import { ToastContainer, toast } from "react-toastify";
 import Chip from '@mui/material/Chip';
+import dayjs from "dayjs"; // Import dayjs for date handling
 
 function ViewSouvenierOrder() {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -36,7 +28,7 @@ function ViewSouvenierOrder() {
   const loggedUser = useSelector((state) => state.auth.loggedUser);
   const darkmode = useSelector((state) => state.darkmode.darkmode);
 
-  const { data} = useQuery({
+  const { data } = useQuery({
     queryFn: () => getSouvenierOrdersByUseremail(loggedUser?.email),
   });
 
@@ -53,30 +45,21 @@ function ViewSouvenierOrder() {
     setOpenDialog(false);
   };
 
-  let formattedSelectedDate = null;
+  const filteredData = data || [];
 
-  if (selectedDate) {
-    const dateObject = new Date(selectedDate);
-    formattedSelectedDate = dateObject.toLocaleDateString("en-GB");
-  }
+  const filteredResults = useMemo(() => {
+    if (!selectedDate) return filteredData;
 
-  // Apply filter function to the data if data is available
-  const filteredData = data ?? []; // Providing a default value for data
+    const formattedSelectedDate = dayjs(selectedDate).format("DD/MM/YYYY");
 
-  // Only filter data if the selected date is defined
-  const filteredResults = selectedDate
-    ? filteredData.filter((item) => {
-        // Format item date to DD/MM/YYYY
-        // const itemDate = item.date.split("/").reverse().join("/");
-        return item?.date === formattedSelectedDate;
-      })
-    : filteredData;
+    return filteredData.filter((item) => {
+      const itemDate = dayjs(item.date, "DD/MM/YYYY").format("DD/MM/YYYY");
+      return itemDate === formattedSelectedDate;
+    });
+  }, [filteredData, selectedDate]);
+
   const handleDarkmode = () => {
-    if (darkmode) {
-      return "white";
-    } else {
-      return "black";
-    }
+    return darkmode ? "white" : "black";
   };
 
   const columns = useMemo(
